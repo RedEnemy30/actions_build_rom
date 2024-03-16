@@ -12,15 +12,15 @@ on:
        rom:
          description: 'ROM(Project folder)'
          required: true
-         default: 'crDroid'
+         default: 'LineageOS'
        manifest:
          description: 'Manifest'
          required: true
-         default: 'https://github.com/crdroidandroid/android.git'
+         default: 'https://github.com/LineageOS/android.git'
        branch:
          description: 'Branch(Manifest)'
          required: true
-         default: '12.1'
+         default: 'lineage-21.0'
        target:
          description: 'Target(Consistent with grus.json file name)'
          required: true
@@ -228,7 +228,7 @@ jobs:
             wget -O md5.txt -q https://raw.githubusercontent.com/${{ github.repository }}/${branch}/md5.txt
             MD5SUM=$(md5sum ${FILENAME} | cut -d' ' -f1)
             sed -i "s/tmp/$MD5SUM/" md5.txt
-            curl -X POST -d 'access_token=77c248185d23821a02e78e750066b1981002c51f4c36df9697aad2fa18f3' -d 'title=MD5SUM' -d 'author_name=Eytan' -d '@md5.txt' "https://api.telegra.ph/createPage" -o test.json
+            curl -X POST -d 'access_token=snowzero' -d 'title=MD5SUM' -d 'author_name=Eytan' -d '@md5.txt' "https://api.telegra.ph/createPage" -o test.json
             echo $(jq -r '.result' test.json) >>md5sum.json
             MD5SUM=$(echo $(jq -r '.url' md5sum.json))
             echo $FILENAME
